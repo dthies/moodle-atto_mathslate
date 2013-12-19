@@ -1,0 +1,6 @@
+{
+  "moodle-atto_mathslate-editor" : {
+      "requires" : [ "dd-drag", "dd-proxy", "dd-drop", "event", "tabview", "io-base", "json", "moodle-atto_mathslate-mathjaxeditor" ]
+  }
+}
+

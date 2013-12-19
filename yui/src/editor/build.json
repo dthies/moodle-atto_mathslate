@@ -1,0 +1,8 @@
+{
+  "name" : "moodle-atto_mathslate-editor" ,
+  "builds" : {
+      "moodle-atto_mathslate-editor": { 
+          "jsfiles" : [ "editor.js" ]
+       }
+  }
+}

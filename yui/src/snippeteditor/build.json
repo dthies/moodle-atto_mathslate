@@ -1,0 +1,8 @@
+{
+  "name" : "moodle-atto_mathslate-snippeteditor" ,
+  "builds" : {
+      "moodle-atto_mathslate-snippeteditor": { 
+          "jsfiles" : [ "snippeteditor.js" ]
+       }
+  }
+}

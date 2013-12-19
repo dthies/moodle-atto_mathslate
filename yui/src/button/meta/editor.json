@@ -1,0 +1,8 @@
+{
+  "moodle-atto_mathslate-button": {
+    "requires": [
+        "escape",
+        "moodle-atto_mathslate-editor"
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "name": "moodle-atto_mathslate-button",
+  "builds": {
+    "moodle-atto_mathslate-button": {
+      "jsfiles": [
+        "button.js"
+      ]
+    }
+  }
+}
