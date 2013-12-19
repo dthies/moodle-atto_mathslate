@@ -1,0 +1,26 @@
+.highlight {
+    color: green;
+}
+
+.highlight {
+    color: green;
+    background-color: red;
+}
+
+.mathslate-workspace {
+    background-color: #CDF; 
+    height: 150px;
+    width: 300px;
+    text-align: center;
+    line-height: 150px;
+    vertical-align: middle;
+}
+
+#canvas {
+    background-color: #CDF; 
+    height: 150px;
+    width: 300px;
+    text-align: center;
+    line-height: 150px;
+    vertical-align: middle;
+}
