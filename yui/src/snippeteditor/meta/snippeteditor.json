@@ -1,6 +1,0 @@
-{
-  "moodle-atto_mathslate-snippeteditor": {
-      "requires": [ "json" ] 
-  }
-}
-

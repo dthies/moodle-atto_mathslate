@@ -8,4 +8,6 @@ change in future versions, and bugs are expected.
 
 Install in Moodle directory lib/editor/atto/plugins/mathslate
 
+Also install plugin local_mathslate which contains necessary library files.
+
 This plugin assumes MathJax is already included and configured in the Moodle installation. 

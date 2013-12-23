@@ -36,7 +36,7 @@ function atto_mathslate_init_editor($elementid) {
     $PAGE->requires->strings_for_js(array( 'mathslate'),'atto_mathslate');
 
     $PAGE->requires->yui_module('moodle-atto_mathslate-button',
-                                'M.atto_mathslate.Button.init',
+                                'M.atto_mathslate.init',
                                 array(array('elementid'=>$elementid, 'icon'=>$icon, 'group'=>'mathslate', 'config'=>$CFG->wwwroot . '/lib/editor/atto/plugins/mathslate/config.json')),
                                 true);
 

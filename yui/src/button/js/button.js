@@ -17,11 +17,12 @@
  * Atto text editor mathslate plugin.
  *
  * @package    editor-atto
+ * @subpackage    mathslate
  * @copyright  2013 Daniel Thies  <dthies@ccal.edu>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 M.atto_mathslate = M.atto_mathslate || {};
-M.atto_mathslate.Button={
+M.atto_mathslate={
     /**
      * The window used to hold the editor.
      *
@@ -40,6 +41,13 @@ M.atto_mathslate.Button={
      */
     selection : null,
 
+    /**
+     * The configuration json string for math tools.
+     *
+     * @property config
+     * @type Range
+     * @default null
+     */
 
     config: null,
 
@@ -61,7 +69,7 @@ display_matheditor : function(e, elementid) {
             dialogue.set('bodyContent', '<div id="'+editorID+'" ></div>');
             dialogue.set('headerContent', M.util.get_string('mathslate', 'atto_mathslate'));
             dialogue.show();
-            var me=new M.atto_mathslate.Editor('#'+editorID);
+            var me=new M.local_mathslate.Editor('#'+editorID,M.atto_mathslate.config);
             me.insertMath= function(math){
                 if (math !== '') {
                     M.editor_atto.set_selection(M.atto_mathslate.selection);
@@ -85,7 +93,7 @@ display_matheditor : function(e, elementid) {
      */
     init : function(params) {
         M.editor_atto.add_toolbar_button(params.elementid, 'mathslate', params.icon, params.group, this.display_matheditor, this);
-        M.atto_mathslate.config=params.config;
+        M.local_mathslate.config=params.config;
     },
 
 
