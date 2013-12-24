@@ -73,7 +73,7 @@ display_matheditor : function(e, elementid) {
             me.insertMath= function(math){
                 if (math !== '') {
                     M.editor_atto.set_selection(M.atto_mathslate.selection);
-                    document.execCommand('insertHTML', false, math);
+                    document.execCommand('insertHTML', false, Y.escape(math));
                     dialogue.hide();
                 }
             };
@@ -94,14 +94,6 @@ display_matheditor : function(e, elementid) {
     init : function(params) {
         M.editor_atto.add_toolbar_button(params.elementid, 'mathslate', params.icon, params.group, this.display_matheditor, this);
         M.local_mathslate.config=params.config;
-    },
-
-
-    insert_math: function(math){
-        if (math !== '') {
-            M.editor_atto.set_selection(M.atto_mathslate.selection);
-            document.execCommand('insertHTML', false, math);
-        }
     }
 
 };
