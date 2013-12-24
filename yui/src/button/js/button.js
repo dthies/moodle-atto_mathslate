@@ -71,11 +71,9 @@ display_matheditor : function(e, elementid) {
             dialogue.show();
             var me=new M.local_mathslate.Editor('#'+editorID,M.atto_mathslate.config);
             me.insertMath= function(math){
-                if (math !== '') {
-                    M.editor_atto.set_selection(M.atto_mathslate.selection);
-                    document.execCommand('insertHTML', false, Y.escape(math));
-                    dialogue.hide();
-                }
+                M.editor_atto.set_selection(M.atto_mathslate.selection);
+                document.execCommand('insertHTML', false, math);
+                dialogue.hide();
             };
             MathJax.Hub.Queue(['Typeset',MathJax.Hub,me.node.generateID()]);
 
@@ -92,8 +90,8 @@ display_matheditor : function(e, elementid) {
      * @param {Object} params
      */
     init : function(params) {
+        M.atto_mathslate.config=params.config;
         M.editor_atto.add_toolbar_button(params.elementid, 'mathslate', params.icon, params.group, this.display_matheditor, this);
-        M.local_mathslate.config=params.config;
     }
 
 };
