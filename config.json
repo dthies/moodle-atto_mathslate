@@ -1,8 +1,3 @@
-/* This file is used the configure the editor.  Each label provides a tab heading. "tools" si an arry math objects  
- * represented by HTML Snippets wich is the internal format of MathJax. A snippet consist of arrays containing strings 
- * or a 3 element array consisting of a string with MathML tagname, and object containing attributes of the object, and 
- * a string or snippet. 
- */
 [   {"label":"ops",
         "tools":[["mo",{"tex":["+"]},"+"],["mo",{"tex":["-"]},"-"],
             ["mo",{},"*"],
