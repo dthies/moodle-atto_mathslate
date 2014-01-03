@@ -70,11 +70,22 @@ display_matheditor : function(e, elementid) {
             dialogue.set('headerContent', M.util.get_string('mathslate', 'atto_mathslate'));
             dialogue.show();
             var me=new M.local_mathslate.Editor('#'+editorID,M.atto_mathslate.config);
-            me.insertMath= function(math){
-                M.editor_atto.set_selection(M.atto_mathslate.selection);
-                document.execCommand('insertHTML', false, math);
+            var cancel=Y.one('#'+editorID).appendChild(Y.Node.create('<button>Cancel</button>'));
+            var displayTex=Y.one('#'+editorID).appendChild(Y.Node.create('<button>Display TeX</button>'));
+            var inlineTex=Y.one('#'+editorID).appendChild(Y.Node.create('<button>Inline TeX</button>'));
+            cancel.on('click',function(){
                 dialogue.hide();
-            };
+            });
+            displayTex.on('click',function(){
+                M.editor_atto.set_selection(M.atto_mathslate.selection);
+                document.execCommand('insertHTML', false, '\\['+me.output('tex')+'\\]');
+                dialogue.hide();
+            });
+            inlineTex.on('click',function(){
+                M.editor_atto.set_selection(M.atto_mathslate.selection);
+                document.execCommand('insertHTML', false, '\\('+me.output('tex')+'\\)');
+                dialogue.hide();
+            });
             MathJax.Hub.Queue(['Typeset',MathJax.Hub,me.node.generateID()]);
 
 
