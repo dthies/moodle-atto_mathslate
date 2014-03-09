@@ -31,7 +31,7 @@ defined('MOODLE_INTERNAL') || die();
 function atto_mathslate_init_editor($elementid) {
     global $PAGE, $OUTPUT, $CFG;
 
-    $icon = array('icon', 'local_mathslate');
+    $icon = array('mathslate', 'atto_mathslate');
 
     $PAGE->requires->strings_for_js(array( 'mathslate'),'atto_mathslate');
 
