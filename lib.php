@@ -34,7 +34,6 @@ function atto_mathslate_init_editor($elementid) {
     $icon = array('icon', 'local_mathslate');
 
     $PAGE->requires->strings_for_js(array( 'mathslate'),'atto_mathslate');
-print $lfjaojfao;
 
     $PAGE->requires->yui_module('moodle-atto_mathslate-button',
                                 'M.atto_mathslate.init',
