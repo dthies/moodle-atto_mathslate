@@ -2,7 +2,7 @@
   "moodle-atto_mathslate-button": {
     "requires": [
         "escape",
-        "moodle-local_mathslate-editor"
+        "moodle-tinymce_mathslate-editor"
     ]
   }
 }

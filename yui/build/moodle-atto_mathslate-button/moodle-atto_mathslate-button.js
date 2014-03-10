@@ -71,7 +71,8 @@ display_matheditor : function(e, elementid) {
             dialogue.set('bodyContent', '<div id="'+editorID+'" ></div>');
             dialogue.set('headerContent', M.util.get_string('mathslate', 'atto_mathslate'));
             dialogue.show();
-            var me=new M.local_mathslate.Editor('#'+editorID,M.atto_mathslate.config);
+            Y.one('#'+editorID).addClass('mathslate-atto');
+            var me=new M.tinymce_mathslate.Editor('#'+editorID,M.atto_mathslate.config);
             var cancel=Y.one('#'+editorID).appendChild(Y.Node.create('<button>Cancel</button>'));
             var displayTex=Y.one('#'+editorID).appendChild(Y.Node.create('<button>Display TeX</button>'));
             var inlineTex=Y.one('#'+editorID).appendChild(Y.Node.create('<button>Inline TeX</button>'));
@@ -110,4 +111,4 @@ display_matheditor : function(e, elementid) {
 };
 
 
-}, '@VERSION@', {"requires": ["escape", "moodle-local_mathslate-editor"]});
+}, '@VERSION@', {"requires": ["escape", "moodle-tinymce_mathslate-editor"]});
