@@ -15,100 +15,105 @@ YUI.add('moodle-atto_mathslate-button', function (Y, NAME) {
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/*
+ * @package    atto_mathslate
+ * @copyright  2014 Daniel Thies <dthies@ccal.edu>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+/**
+ * @module moodle-atto_mathslate-button
+ */
+
 /**
  * Atto text editor mathslate plugin.
  *
- * @package    editor-atto
- * @subpackage    mathslate
- * @copyright  2013 Daniel Thies  <dthies@ccal.edu>
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @namespace M.atto_mathslate
+ * @class button
+ * @extends M.editor_atto.EditorPlugin
  */
-M.atto_mathslate = M.atto_mathslate || {};
-M.atto_mathslate={
-    /**
-     * The window used to hold the editor.
-     *
-     * @property dialogue
-     * @type M.core.dialogue
-     * @default null
-     */
-    dialogue : null,
 
-    /**
-     * The selection object returned by the browser.
-     *
-     * @property selection
-     * @type Range
-     * @default null
-     */
-    selection : null,
+var COMPONENTNAME = 'atto_mathslate';
 
-    /**
-     * The configuration json string for math tools.
-     *
-     * @property config
-     * @type Range
-     * @default null
-     */
+Y.namespace('M.atto_mathslate').Button = Y.Base.create('button', Y.M.editor_atto.EditorPlugin, [], {
+    _currentSelection: null,
+    _getTeX: null,
+    initializer: function() {
+        this._groupFocus = {};
 
-    config: null,
+        var iconurl = this.get('iconurl');
 
-display_matheditor : function(e, elementid) {
-        e.preventDefault();
-        if (!M.editor_atto.is_active(elementid)) {
-            M.editor_atto.focus(elementid);
-        }
-        M.atto_mathslate.selection = M.editor_atto.get_selection();
-        if (M.atto_mathslate.selection !== false) {
-            var dialogue = M.atto_mathslate.dialogue|| new M.core.dialogue({
-                    visible: false,
-                    modal: true,
-                    close: true,
-                    draggable: true
-                });
-            dialogue.render();
-            var editorID=Y.guid();
-            dialogue.set('bodyContent', '<div id="'+editorID+'" ></div>');
-            dialogue.set('headerContent', M.util.get_string('mathslate', 'atto_mathslate'));
-            dialogue.show();
-            Y.one('#'+editorID).addClass('mathslate-atto');
-            var me=new M.tinymce_mathslate.Editor('#'+editorID,M.atto_mathslate.config);
-            var cancel=Y.one('#'+editorID).appendChild(Y.Node.create('<button>Cancel</button>'));
-            var displayTex=Y.one('#'+editorID).appendChild(Y.Node.create('<button>Display TeX</button>'));
-            var inlineTex=Y.one('#'+editorID).appendChild(Y.Node.create('<button>Inline TeX</button>'));
-            cancel.on('click',function(){
-                dialogue.hide();
-            });
-            displayTex.on('click',function(){
-                M.editor_atto.set_selection(M.atto_mathslate.selection);
-                document.execCommand('insertHTML', false, '\\['+me.output('tex')+'\\]');
-                dialogue.hide();
-            });
-            inlineTex.on('click',function(){
-                M.editor_atto.set_selection(M.atto_mathslate.selection);
-                document.execCommand('insertHTML', false, '\\('+me.output('tex')+'\\)');
-                dialogue.hide();
-            });
-            MathJax.Hub.Queue(['Typeset',MathJax.Hub,me.node.generateID()]);
-
-
-            M.atto_mathslate.dialogue = dialogue;
-        }
+        this.addButton({
+            iconurl: iconurl,
+            //iconurl: 'http://localhost/moodle/lib/editor/atto/plugins/mathslate/pix/mathslate.png',
+            callback: this._displayDialogue
+        });
     },
+    _displayDialogue: function() {
+        var editorID=Y.guid();
+        var config = this.get('configurl');
 
+        var host = this.get('host');
 
-    /**
-     * Add this button to the form.
-     *
-     * @method init
-     * @param {Object} params
-     */
-    init : function(params) {
-        M.atto_mathslate.config=params.config;
-        M.editor_atto.add_toolbar_button(params.elementid, 'mathslate', params.icon, params.group, this.display_matheditor, this);
+        // Store the current selection.
+        this._currentSelection = host.getSelection();
+        var currentSelection = host.getSelection();
+        if (this._currentSelection === false) {
+            return;
+        }
+
+        var dialogue = this.getDialogue({
+            headerContent: M.util.get_string('pluginname', COMPONENTNAME),
+            width: 500
+        }, true);
+        dialogue.set('bodyContent', '<div id="' + editorID + '"></div>');
+
+        dialogue.show();
+
+        var me=new M.tinymce_mathslate.Editor('#'+editorID, config);
+        Y.one('#'+editorID).addClass('mathslate-atto');
+        var cancel=Y.one('#'+editorID).appendChild(Y.Node.create('<button>Cancel</button>'));
+        var displayTex=Y.one('#'+editorID).appendChild(Y.Node.create('<button>Display TeX</button>'));
+        var inlineTex=Y.one('#'+editorID).appendChild(Y.Node.create('<button>Inline TeX</button>'));
+        cancel.on('click',function(){
+            dialogue.hide();
+        });
+        displayTex.on('click',function() {
+            dialogue.hide();
+            host.setSelection(currentSelection);
+            host.insertContentAtFocusPoint('\\[' + me.output('tex') + '\\]');
+            this.markUpdated();
+        });
+        inlineTex.on('click',function() {
+            dialogue.hide();
+            host.setSelection(currentSelection);
+            host.insertContentAtFocusPoint('\\(' + me.output('tex') + '\\)');
+            this.markUpdated();
+        });
+
     }
-
-};
+}, {
+    ATTRS: {
+        /**
+         * The url of the configuration file for mathematics templates
+         *
+         * @attribute configurl
+         * @type string
+         */
+        configurl: {
+            value: null
+        },
+        /**
+         * The url of the icon for the toolbar
+         *
+         * @attribute iconurl
+         * @type string
+         */
+        iconurl: {
+            value: null
+        }
+    }
+});
 
 
 }, '@VERSION@', {"requires": ["escape", "moodle-tinymce_mathslate-editor"]});

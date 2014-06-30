@@ -25,27 +25,28 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Initialise this plugin
- * @param string $elementid
- */
-function atto_mathslate_init_editor($elementid) {
-    global $PAGE, $OUTPUT, $CFG;
-
-    $icon = array('mathslate', 'atto_mathslate');
-
-    $PAGE->requires->strings_for_js(array( 'mathslate'),'atto_mathslate');
-
-    $PAGE->requires->yui_module('moodle-atto_mathslate-button',
-                                'M.atto_mathslate.init',
-                                array(array('elementid'=>$elementid, 'icon'=>$icon, 'group'=>'mathslate', 'config'=>$CFG->wwwroot . '/lib/editor/atto/plugins/mathslate/config.json')),
-                                true);
-
-}
-
-/**
  * Return the order this plugin should be displayed in the toolbar
  * @return int the absolute position within the toolbar
  */
-function atto_mathslate_sort_order() {
-    return 21;
+
+function atto_mathslate_strings_for_js() {
+global $PAGE;
+
+$PAGE->requires->strings_for_js(array( 'mathslate', 'cancel', 'cancel_desc',
+        'inline', 'display', 'inline_desc', 'display_desc', 'nomathjax',
+        'clear', 'undo', 'redo', 'help'), 'tinymce_mathslate');
+};
+
+function atto_mathslate_params_for_js($elementid, $options, $fpoptions) {
+    global $CFG;
+    $context = $options['context'];
+    if (!$context) {
+        $context = context_system::instance();
+    }
+
+    $config = $CFG->wwwroot . '/lib/editor/tinymce/plugins/mathslate/config.json';
+    $icon = $CFG->wwwroot . '/lib/editor/atto/plugins/mathslate/pix/mathslate.png';
+    return array('configurl' => $config,
+                'iconurl' => $icon
+    );
 }

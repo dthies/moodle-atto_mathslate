@@ -24,7 +24,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2014030900;        // The current plugin version (Date: YYYYMMDDXX).
+$plugin->version   = 2014030902;        // The current plugin version (Date: YYYYMMDDXX).
 $plugin->requires  = 2013050100;        // Requires this Moodle version.
 $plugin->component = 'atto_mathslate';  // Full name of the plugin (used for diagnostics).
 // Require Mathslate common modules.
