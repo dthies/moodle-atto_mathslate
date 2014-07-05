@@ -64,9 +64,12 @@ Y.namespace('M.atto_mathslate').Button = Y.Base.create('button', Y.M.editor_atto
             headerContent: M.util.get_string('pluginname', COMPONENTNAME),
             width: 500
         }, true);
-        dialogue.set('bodyContent', '<div id="' + editorID + '"></div>');
+        dialogue.set('bodyContent', '<div class="filter_mathjaxloader_equation"><div id="' + editorID + '">\\( \\)</div></div>');
 
         dialogue.show();
+        // Trigger Mathjaxloader so that it send a 'TeX Jax Config' signal with MathJax if TeX is configured.
+        Y.fire(M.core.event.FILTER_CONTENT_UPDATED, {nodes: (new Y.NodeList(dialogue.get('boundingBox')))});
+
 
         var me=new M.tinymce_mathslate.Editor('#'+editorID, config);
         Y.one('#'+editorID).addClass('mathslate-atto');
