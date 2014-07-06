@@ -86,13 +86,13 @@ Y.namespace('M.atto_mathslate').Button = Y.Base.create('button', Y.M.editor_atto
             host.setSelection(currentSelection);
             host.insertContentAtFocusPoint('\\[' + me.output('tex') + '\\]');
             this.markUpdated();
-        });
+        },this);
         inlineTex.on('click',function() {
             dialogue.hide();
             host.setSelection(currentSelection);
             host.insertContentAtFocusPoint('\\(' + me.output('tex') + '\\)');
             this.markUpdated();
-        });
+        },this);
 
     }
 }, {
