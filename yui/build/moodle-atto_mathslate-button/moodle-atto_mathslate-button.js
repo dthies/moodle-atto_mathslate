@@ -83,12 +83,12 @@ display_matheditor : function(e, elementid) {
                 M.editor_atto.set_selection(M.atto_mathslate.selection);
                 document.execCommand('insertHTML', false, '\\['+me.output('tex')+'\\]');
                 dialogue.hide();
-            });
+            },this);
             inlineTex.on('click',function(){
                 M.editor_atto.set_selection(M.atto_mathslate.selection);
                 document.execCommand('insertHTML', false, '\\('+me.output('tex')+'\\)');
                 dialogue.hide();
-            });
+            },this);
             MathJax.Hub.Queue(['Typeset',MathJax.Hub,me.node.generateID()]);
 
 
