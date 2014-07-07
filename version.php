@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Atto text editor integration version file.
+ * Atto text editor Mathslate integration version file.
  *
  * @package    atto_mathslate
  * @copyright  2013 Daniel Thies <dthies@ccal.edu>
