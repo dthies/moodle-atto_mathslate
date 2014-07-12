@@ -39,13 +39,16 @@ Y.namespace('M.atto_mathslate').Button = Y.Base.create('button', Y.M.editor_atto
     _currentSelection: null,
     _getTeX: null,
     initializer: function() {
+        // Check whether MathJax is available.
+        if (typeof MathJax === 'undefined' && !this.get('filteractive')) {
+            return;
+        }
         this._groupFocus = {};
 
         var iconurl = this.get('iconurl');
 
         this.addButton({
             iconurl: iconurl,
-            //iconurl: 'http://localhost/moodle/lib/editor/atto/plugins/mathslate/pix/mathslate.png',
             callback: this._displayDialogue
         });
     },

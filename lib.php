@@ -44,9 +44,12 @@ function atto_mathslate_params_for_js($elementid, $options, $fpoptions) {
         $context = context_system::instance();
     }
 
+    $filteractive = array_key_exists('mathjaxloader', filter_get_active_in_context($context));
+
     $config = $CFG->wwwroot . '/lib/editor/tinymce/plugins/mathslate/config.json';
     $icon = $CFG->wwwroot . '/lib/editor/atto/plugins/mathslate/pix/mathslate.png';
     return array('configurl' => $config,
+                'filteractive' => $filteractive,
                 'iconurl' => $icon
     );
 }
