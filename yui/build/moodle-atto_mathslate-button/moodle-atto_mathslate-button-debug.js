@@ -75,16 +75,16 @@ Y.namespace('M.atto_mathslate').Button = Y.Base.create('button', Y.M.editor_atto
         // Trigger Mathjaxloader so that it will load MathJax.
         Y.fire(M.core.event.FILTER_CONTENT_UPDATED, {nodes: (new Y.NodeList(dialogue.get('boundingBox')))});
 
-        var cancel=Y.one('#'+editorID).appendChild(Y.Node.create('<button>Cancel</button>'));
-        cancel.on('click',function(){
-            dialogue.hide();
-        });
         var me;
         window.setTimeout(function() {
             me=new M.tinymce_mathslate.Editor('#'+editorID, config);
             Y.one('#'+editorID).addClass('mathslate-atto');
+            var cancel=Y.one('#'+editorID).appendChild(Y.Node.create('<button>Cancel</button>'));
             var displayTex=Y.one('#'+editorID).appendChild(Y.Node.create('<button>Display TeX</button>'));
             var inlineTex=Y.one('#'+editorID).appendChild(Y.Node.create('<button>Inline TeX</button>'));
+            cancel.on('click',function(){
+                dialogue.hide();
+            });
             displayTex.on('click',function() {
                 dialogue.hide();
                 host.setSelection(currentSelection);
