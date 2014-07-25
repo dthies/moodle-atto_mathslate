@@ -76,6 +76,7 @@ Y.namespace('M.atto_mathslate').Button = Y.Base.create('button', Y.M.editor_atto
         Y.fire(M.core.event.FILTER_CONTENT_UPDATED, {nodes: (new Y.NodeList(dialogue.get('boundingBox')))});
 
         var me;
+        var self = this;
         window.setTimeout(function() {
             me=new M.tinymce_mathslate.Editor('#'+editorID, config);
             Y.one('#'+editorID).addClass('mathslate-atto');
@@ -89,13 +90,13 @@ Y.namespace('M.atto_mathslate').Button = Y.Base.create('button', Y.M.editor_atto
                 dialogue.hide();
                 host.setSelection(currentSelection);
                 host.insertContentAtFocusPoint('\\[' + me.output('tex') + '\\]');
-                this.markUpdated();
+                self.markUpdated();
             },this);
             inlineTex.on('click',function() {
                 dialogue.hide();
                 host.setSelection(currentSelection);
                 host.insertContentAtFocusPoint('\\(' + me.output('tex') + '\\)');
-                this.markUpdated();
+                self.markUpdated();
             },this);
         },(typeof MathJax === 'undefined') ? 500 : 0);
 
