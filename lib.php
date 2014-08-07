@@ -48,8 +48,10 @@ function atto_mathslate_params_for_js($elementid, $options, $fpoptions) {
 
     $config = $CFG->wwwroot . '/lib/editor/tinymce/plugins/mathslate/config.json';
     $icon = $CFG->wwwroot . '/lib/editor/atto/plugins/mathslate/pix/mathslate.png';
+    $help = $CFG->wwwroot . '/lib/editor/tinymce/plugins/mathslate/help.php';
     return array('configurl' => $config,
                 'filteractive' => $filteractive,
+                'helpurl' => $help,
                 'iconurl' => $icon
     );
 }
