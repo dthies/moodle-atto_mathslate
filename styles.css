@@ -1,3 +1,32 @@
+.mathslate-atto .mathslate-workspace-dragged .MathJax_SVG_Display svg > g {
+    fill: #888;
+    stroke: #888;
+}
+
+.mathslate-atto .mathslate-workspace .mathslate-highlight .MathJax_SVG svg > g,
+.mathslate-atto .mathslate-workspace .mathslate-highlight .MathJax_SVG_Display svg > g {
+    fill: yellow;
+    stroke: yellow;
+}
+
+.mathslate-atto .mathslate-workspace .mathslate-selected .MathJax_SVG svg > g,
+.mathslate-atto .mathslate-workspace .mathslate-selected .MathJax_SVG_Display svg > g {
+    fill: green;
+    stroke: green;
+}
+
+.mathslate-atto .mathslate-workspace .MathJax_SVG svg > g,
+.mathslate-atto .mathslate-workspace .MathJax_SVG_Display svg > g {
+    fill: #EEE;
+    stroke: #EEE;
+}
+
+.mathslate-atto .mathslate-toolbox .MathJax_SVG svg > g,
+.mathslate-atto .mathslate-toolbox .MathJax_SVG_Display svg > g {
+    fill: #888;
+    stroke: #888;
+}
+
 .mathslate-atto .mathslate-highlight {
     color: yellow
 }

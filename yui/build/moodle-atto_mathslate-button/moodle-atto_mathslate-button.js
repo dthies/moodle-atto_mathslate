@@ -34,6 +34,7 @@ YUI.add('moodle-atto_mathslate-button', function (Y, NAME) {
  */
 
 var COMPONENTNAME = 'atto_mathslate';
+var CSS = {EDITOR: 'mathslate-atto'};
 
 Y.namespace('M.atto_mathslate').Button = Y.Base.create('button', Y.M.editor_atto.EditorPlugin, [], {
     _currentSelection: null,
@@ -78,11 +79,11 @@ Y.namespace('M.atto_mathslate').Button = Y.Base.create('button', Y.M.editor_atto
 
         var me;
         window.setTimeout(function() {
-            me=new M.tinymce_mathslate.Editor('#'+editorID, config);
-            Y.one('#'+editorID).addClass('mathslate-atto');
-            var cancel=Y.one('#'+editorID).appendChild(Y.Node.create('<button>Cancel</button>'));
-            var displayTex=Y.one('#'+editorID).appendChild(Y.Node.create('<button>Display TeX</button>'));
-            var inlineTex=Y.one('#'+editorID).appendChild(Y.Node.create('<button>Inline TeX</button>'));
+            me = new M.tinymce_mathslate.Editor('#' + editorID, config);
+            Y.one('#' + editorID).addClass(CSS.EDITOR);
+            var cancel = Y.one('#' + editorID).appendChild(Y.Node.create('<button>Cancel</button>'));
+            var displayTex = Y.one('#' + editorID).appendChild(Y.Node.create('<button>Display TeX</button>'));
+            var inlineTex = Y.one('#' + editorID).appendChild(Y.Node.create('<button>Inline TeX</button>'));
             cancel.on('click',function(){
                 dialogue.hide();
             });
