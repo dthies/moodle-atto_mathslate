@@ -24,9 +24,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2014071200;        // The current plugin version (Date: YYYYMMDDXX).
+$plugin->version   = 2015030500;        // The current plugin version (Date: YYYYMMDDXX).
 $plugin->requires  = 2014051200;        // Requires this Moodle version.
 $plugin->component = 'atto_mathslate';  // Full name of the plugin (used for diagnostics).
-// Require Mathslate common modules.
-$plugin->dependencies = array('tinymce_mathslate' => 2014022600);
-
+// Require Mathslate TinyMCE modules.
+$plugin->dependencies = array('tinymce_mathslate' => 2015030500);
+$plugin->maturity = MATURITY_BETA;
+$plugin->release = '1.0 Beta';

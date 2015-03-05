@@ -15,7 +15,7 @@
 
 /*
  * @package    atto_mathslate
- * @copyright  2014 Daniel Thies <dthies@ccal.edu>
+ * @copyright  2014 onward Daniel Thies <dthies@ccal.edu>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -44,10 +44,9 @@ Y.namespace('M.atto_mathslate').Button = Y.Base.create('button', Y.M.editor_atto
         }
         this._groupFocus = {};
 
-        var iconurl = this.get('iconurl');
-
         this.addButton({
-            iconurl: iconurl,
+            icon: 'mathslate',
+            iconComponent: COMPONENTNAME,
             callback: this._displayDialogue
         });
         M.tinymce_mathslate.help = this.get('helpurl');
@@ -67,11 +66,12 @@ Y.namespace('M.atto_mathslate').Button = Y.Base.create('button', Y.M.editor_atto
 
         var dialogue = this.getDialogue({
             headerContent: M.util.get_string('pluginname', COMPONENTNAME),
+            bodyContent: '<div style="height:500px"></div>',
             width: 500
         }, true);
+        dialogue.show();
         dialogue.set('bodyContent', '<div class="filter_mathjaxloader_equation"><div id="' + editorID + '"></div><!--\\( \\)--></div>');
 
-        dialogue.show();
         // Trigger Mathjaxloader so that it will load MathJax.
         Y.fire(M.core.event.FILTER_CONTENT_UPDATED, {nodes: (new Y.NodeList(dialogue.get('boundingBox')))});
 
@@ -118,15 +118,6 @@ Y.namespace('M.atto_mathslate').Button = Y.Base.create('button', Y.M.editor_atto
          * @type string
          */
         helpurl: {
-            value: null
-        },
-        /**
-         * The url of the icon for the toolbar
-         *
-         * @attribute iconurl
-         * @type string
-         */
-        iconurl: {
             value: null
         }
     }

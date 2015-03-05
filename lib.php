@@ -18,7 +18,7 @@
  * Atto text editor integration version file.
  *
  * @package    atto_mathslate
- * @copyright  2013 Daniel Thies <dthies@ccal.edu>
+ * @copyright  2013 onward Daniel Thies <dthies@ccal.edu>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -47,11 +47,9 @@ function atto_mathslate_params_for_js($elementid, $options, $fpoptions) {
     $filteractive = array_key_exists('mathjaxloader', filter_get_active_in_context($context));
 
     $config = $CFG->wwwroot . '/lib/editor/tinymce/plugins/mathslate/config.json';
-    $icon = $CFG->wwwroot . '/lib/editor/atto/plugins/mathslate/pix/mathslate.png';
     $help = $CFG->wwwroot . '/lib/editor/tinymce/plugins/mathslate/help.php';
     return array('configurl' => $config,
                 'filteractive' => $filteractive,
-                'helpurl' => $help,
-                'iconurl' => $icon
+                'helpurl' => $help
     );
 }
