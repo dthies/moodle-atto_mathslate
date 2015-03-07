@@ -52,7 +52,7 @@ Y.namespace('M.atto_mathslate').Button = Y.Base.create('button', Y.M.editor_atto
         M.tinymce_mathslate.help = this.get('helpurl');
     },
     _displayDialogue: function() {
-        var editorID=Y.guid();
+        var editorID = Y.guid();
         var config = this.get('configurl');
 
         var host = this.get('host');
@@ -70,7 +70,9 @@ Y.namespace('M.atto_mathslate').Button = Y.Base.create('button', Y.M.editor_atto
             width: 500
         }, true);
         dialogue.show();
-        dialogue.set('bodyContent', '<div class="filter_mathjaxloader_equation"><div id="' + editorID + '"></div><!--\\( \\)--></div>');
+        dialogue.set('bodyContent', '<div class="filter_mathjaxloader_equation"><div id="'
+            + editorID
+            + '"></div><!--\\( \\)--></div>');
 
         // Trigger Mathjaxloader so that it will load MathJax.
         Y.fire(M.core.event.FILTER_CONTENT_UPDATED, {nodes: (new Y.NodeList(dialogue.get('boundingBox')))});
@@ -82,22 +84,22 @@ Y.namespace('M.atto_mathslate').Button = Y.Base.create('button', Y.M.editor_atto
             var cancel = Y.one('#' + editorID).appendChild(Y.Node.create('<button>Cancel</button>'));
             var displayTex = Y.one('#' + editorID).appendChild(Y.Node.create('<button>Display TeX</button>'));
             var inlineTex = Y.one('#' + editorID).appendChild(Y.Node.create('<button>Inline TeX</button>'));
-            cancel.on('click',function(){
+            cancel.on('click', function(){
                 dialogue.hide();
             });
-            displayTex.on('click',function() {
+            displayTex.on('click', function() {
                 dialogue.hide();
-                host.setSelection(currentSelection);
+                host.setSelection(this._currentSelection);
                 host.insertContentAtFocusPoint('\\[' + me.output('tex') + '\\]');
                 this.markUpdated();
-            },this);
-            inlineTex.on('click',function() {
+            }, this);
+            inlineTex.on('click', function() {
                 dialogue.hide();
                 host.setSelection(currentSelection);
                 host.insertContentAtFocusPoint('\\(' + me.output('tex') + '\\)');
                 this.markUpdated();
-            },this);
-        },(typeof MathJax === 'undefined') ? 500 : 0);
+            }, this);
+        }, (typeof window.MathJax === 'undefined') ? 500 : 0);
 
     }
 }, {
