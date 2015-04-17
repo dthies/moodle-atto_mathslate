@@ -1,0 +1,10 @@
+This plugin provides access for Atto to Mathslate editor used in the 
+mature TinyMCE plugin. There do not seem to be any major bugs when
+used with the latest Mathslate code 1.1 RC. Use of this plugin requires 
+installation of TinyMCE Mathslate plugin, and the activation of MathJax
+on the Moodle site.
+
+Install this directory as lib/editor/atto/plugins/mathslate and the
+TinyMCE plugin as lib/editor/atto/plugins/mathslate.  Then visit the
+notifications as admin to install to database, and then add the button to
+the appropriate place in the Atto toolbar settings.
