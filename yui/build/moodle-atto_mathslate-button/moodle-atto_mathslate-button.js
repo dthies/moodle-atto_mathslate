@@ -80,6 +80,7 @@ Y.namespace('M.atto_mathslate').Button = Y.Base.create('button', Y.M.editor_atto
         Y.fire(M.core.event.FILTER_CONTENT_UPDATED, {nodes: (new Y.NodeList(dialogue.get('boundingBox')))});
 
         var me;
+        var context = this;
         window.setTimeout(function() {
             me = new M.tinymce_mathslate.Editor('#' + editorID, config);
             Y.one('#' + editorID).addClass(CSS.EDITOR);
@@ -91,16 +92,16 @@ Y.namespace('M.atto_mathslate').Button = Y.Base.create('button', Y.M.editor_atto
             });
             displayTex.on('click', function() {
                 dialogue.hide();
-                host.setSelection(this._currentSelection);
+                host.setSelection(currentSelection);
                 host.insertContentAtFocusPoint('\\[' + me.output('tex') + '\\]');
-                this.markUpdated();
-            }, this);
+                context.markUpdated();
+            });
             inlineTex.on('click', function() {
                 dialogue.hide();
                 host.setSelection(currentSelection);
                 host.insertContentAtFocusPoint('\\(' + me.output('tex') + '\\)');
-                this.markUpdated();
-            }, this);
+                context.markUpdated();
+            });
         }, (typeof window.MathJax === 'undefined') ? 500 : 0);
 
     }
