@@ -18,16 +18,16 @@
  * Atto text editor Mathslate integration version file.
  *
  * @package    atto_mathslate
- * @copyright  2013 Daniel Thies <dthies@ccal.edu>
+ * @copyright  2013 onward Daniel Thies <dthies@ccal.edu>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2015030500;        // The current plugin version (Date: YYYYMMDDXX).
+$plugin->version   = 2015041600;        // The current plugin version (Date: YYYYMMDDXX).
 $plugin->requires  = 2014051200;        // Requires this Moodle version.
 $plugin->component = 'atto_mathslate';  // Full name of the plugin (used for diagnostics).
 // Require Mathslate TinyMCE modules.
 $plugin->dependencies = array('tinymce_mathslate' => 2015030500);
-$plugin->maturity = MATURITY_BETA;
-$plugin->release = '1.0 Beta';
+$plugin->maturity = MATURITY_STABLE;
+$plugin->release = '2015041600';
