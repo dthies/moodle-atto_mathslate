@@ -30,4 +30,4 @@ $plugin->component = 'atto_mathslate';  // Full name of the plugin (used for dia
 // Require Mathslate TinyMCE modules.
 $plugin->dependencies = array('tinymce_mathslate' => 2015030500);
 $plugin->maturity = MATURITY_STABLE;
-$plugin->release = '2015041600';
+$plugin->release = '2015041601';

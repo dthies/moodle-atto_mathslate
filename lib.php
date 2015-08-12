@@ -46,6 +46,11 @@ function atto_mathslate_params_for_js($elementid, $options, $fpoptions) {
 
     $filteractive = array_key_exists('mathjaxloader', filter_get_active_in_context($context));
 
+    // Run format_text to load MathJax via filter.
+    if (filteractive) {
+        $result = format_text("\\(x\\)", true, $options);
+    }
+
     $config = $CFG->wwwroot . '/lib/editor/tinymce/plugins/mathslate/config.json';
     $help = $CFG->wwwroot . '/lib/editor/tinymce/plugins/mathslate/help.php';
     return array('configurl' => $config,
