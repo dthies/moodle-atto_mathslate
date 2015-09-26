@@ -47,7 +47,7 @@ function atto_mathslate_params_for_js($elementid, $options, $fpoptions) {
     $filteractive = array_key_exists('mathjaxloader', filter_get_active_in_context($context));
 
     // Run format_text to load MathJax via filter.
-    if (filteractive) {
+    if ($filteractive) {
         $result = format_text("\\(x\\)", true, $options);
     }
 
