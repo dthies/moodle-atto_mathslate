@@ -100,6 +100,14 @@ Y.namespace('M.atto_mathslate').Button = Y.Base.create('button', Y.M.editor_atto
                 host.insertContentAtFocusPoint('\\(' + me.output('tex') + '\\)');
                 context.markUpdated();
             });
+            Y.one('#' + editorID).on('mouseover', function(e) {
+                e.stopPropagation();
+                console.log('mouseover');
+            });
+            Y.one('#' + editorID).on('mouseout', function(e) {
+                e.stopPropagation();
+                console.log('mouseout');
+            });
         }, (typeof window.MathJax === 'undefined') ? 500 : 0);
 
     }
