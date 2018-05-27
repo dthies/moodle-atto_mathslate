@@ -17,8 +17,8 @@
 
 .mathslate-atto .mathslate-workspace .MathJax_SVG svg > g,
 .mathslate-atto .mathslate-workspace .MathJax_SVG_Display svg > g {
-    fill: #EEE;
-    stroke: #EEE;
+    fill: #eee;
+    stroke: #eee;
 }
 
 .mathslate-atto .mathslate-toolbox .MathJax_SVG svg > g,
@@ -35,16 +35,16 @@
 
 .mathslate-atto .mathslate-toolbox .yui3-tab-selected .yui3-tab-label .MathJax_SVG svg > g,
 .mathslate-atto .mathslate-toolbox .yui3-tab-selected .yui3-tab-label .MathJax_SVG_Display svg > g {
-    fill: #FFF;
-    stroke: #FFF;
+    fill: #fff;
+    stroke: #fff;
 }
 
 .mathslate-atto .mathslate-highlight {
-    color: yellow
+    color: yellow;
 }
 
 .mathslate-atto .mathslate-workspace .mathslate-selected {
-    color: green
+    color: green;
 }
 
 .mathslate-atto .mathslate-workspace-dragged {
@@ -52,7 +52,7 @@
 }
 
 .mathslate-atto .mathslate-toolbox-drag, .mathslate-workspace-drag {
-    color: #FFF;
+    color: #fff;
 }
 
 .mathslate-atto .mathslate-preview {
@@ -61,7 +61,7 @@
     overflow: scroll;
     text-align: left;
     background: #111;
-    color: #FFF;
+    color: #fff;
 }
 
 .mathslate-atto .mathslate-preview div {
@@ -77,10 +77,10 @@
 }
 
 .mathslate-atto iframe {
-    background: #FFF;
+    background: #fff;
     height: 130px;
     padding: 0;
-    border: 0px;
+    border: 0;
 }
 
 .mathslate-atto .mathslate-preview .mathslate-selected {
@@ -94,16 +94,16 @@
 
 @keyframes flash {
     from {
-    border-left: solid 5px #1F1;
+        border-left: solid 5px #1F1;
     }
     35% {
-    border-left: solid 5px #1E1;
+        border-left: solid 5px #1E1;
     }
     65% {
-    border-left: solid 5px #131;
+        border-left: solid 5px #131;
     }
     to {
-    border-left: solid 5px #121;
+        border-left: solid 5px #121;
     }
 }
 
@@ -111,8 +111,8 @@
 }
 
 .mathslate-atto .mathslate-workspace {
-    background-color: #333; 
-    color: #EEE; 
+    background-color: #333;
+    color: #eee;
     height: 100px;
     text-align: center;
     line-height: 100px;
@@ -121,36 +121,36 @@
     border-top: solid #999 4px;
     border-right: solid #888 6px;
     border-bottom: solid #555 4px;
-    vertical-align: middle
+    vertical-align: middle;
 }
 
 .mathslate-atto .mathslate-toolbox {
-color: #888
+    color: #888
 }
 
 .mathslate-atto .yui3-tabview-panel p {
-padding: 1px
+    padding: 1px;
 }
 
 .mathslate-atto .mathslate-toolbox .yui3-tabview-panel {
-    background: #EEE;
-    background: radial-gradient(#EEE,#BBB)
+    background: #eee;
+    background: radial-gradient(#eee, #bbb)
 }
 
 .mathslate-atto .mathslate-toolbox .yui3-tab-label {
     height: 2em;
-    width: 4em
+    width: 4em;
 }
 
 .mathslate-atto .mathslate-toolbox .yui3-tab-selected .yui3-tab-focused {
     background-image: none ;
-    background: linear-gradient(to top,#444,#888)
+    background: linear-gradient(to top, #444, #888)
 }
 
 .mathslate-atto .mathslate-toolbox .yui3-tab-selected .yui3-tab-label {
     background: #444;
     background-image: none;
-    background: linear-gradient(to bottom,#AAA,#444) !important
+    background: linear-gradient(to bottom, #aaa, #444) !important;
 }
 
 .mathslate-atto .mathslate-toolbox .yui3-tabview-list {
@@ -158,7 +158,7 @@ padding: 1px
 }
 
 .mathslate-atto .yui3-tabview-panel {
-height: 100px
+    height: 100px;
 }
 
 .mathslate-atto .mathslate-delete-button {
@@ -174,7 +174,7 @@ height: 100px
     width: 24px;
     height: 24px;
     text-align: center;
-    padding: 0px;
+    padding: 0;
 }
 
 .mathslate-atto .mathslate-help-box {
