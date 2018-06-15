@@ -51,7 +51,8 @@
     color: #888;
 }
 
-.mathslate-atto .mathslate-toolbox-drag, .mathslate-workspace-drag {
+.mathslate-atto .mathslate-toolbox-drag,
+.mathslate-atto .mathslate-workspace-drag {
     color: #fff;
 }
 
@@ -140,7 +141,7 @@
 }
 
 .mathslate-atto .mathslate-toolbox .yui3-tab-selected .yui3-tab-label {
-    background: linear-gradient(to bottom, #aaa, #444) !important;
+    background: linear-gradient(to bottom, #aaa, #444);
 }
 
 .mathslate-atto .mathslate-toolbox .yui3-tabview-list {
