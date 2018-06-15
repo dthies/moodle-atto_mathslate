@@ -16,7 +16,6 @@
 
 /**
  * Strings for component 'atto_mathslate', language 'en'.
- * Strings for component 'atto_mathslate', language 'en'.
  *
  * @package    atto_mathslate
  * @copyright  2013 Dan Thies <dthies@ccal.edu>

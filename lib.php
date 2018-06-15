@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Atto text editor integration version file.
+ * Atto text editor mathslate integration function library
  *
  * @package    atto_mathslate
  * @copyright  2013 onward Daniel Thies <dthies@ccal.edu>
@@ -29,14 +29,24 @@ defined('MOODLE_INTERNAL') || die();
  * @return int the absolute position within the toolbar
  */
 
+/**
+ * Initialise the js strings required for this module.
+ */
 function atto_mathslate_strings_for_js() {
-global $PAGE;
+    global $PAGE;
 
-$PAGE->requires->strings_for_js(array( 'mathslate', 'cancel', 'cancel_desc',
-        'inline', 'display', 'inline_desc', 'display_desc', 'nomathjax',
-        'clear', 'undo', 'redo', 'help'), 'tinymce_mathslate');
+    $PAGE->requires->strings_for_js(array( 'mathslate', 'cancel', 'cancel_desc',
+            'inline', 'display', 'inline_desc', 'display_desc', 'nomathjax',
+            'clear', 'undo', 'redo', 'help'), 'tinymce_mathslate');
 };
 
+/**
+ * Set params for this plugin.
+ *
+ * @param string $elementid
+ * @param stdClass $options - the options for the editor, including the context.
+ * @param stdClass $fpoptions - unused.
+ */
 function atto_mathslate_params_for_js($elementid, $options, $fpoptions) {
     global $CFG;
     $context = $options['context'];

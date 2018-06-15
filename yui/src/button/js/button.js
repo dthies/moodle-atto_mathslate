@@ -85,7 +85,7 @@ Y.namespace('M.atto_mathslate').Button = Y.Base.create('button', Y.M.editor_atto
             var cancel = Y.one('#' + editorID).appendChild(Y.Node.create('<button>Cancel</button>'));
             var displayTex = Y.one('#' + editorID).appendChild(Y.Node.create('<button>Display TeX</button>'));
             var inlineTex = Y.one('#' + editorID).appendChild(Y.Node.create('<button>Inline TeX</button>'));
-            cancel.on('click', function(){
+            cancel.on('click', function() {
                 dialogue.hide();
             });
             displayTex.on('click', function() {
@@ -102,11 +102,9 @@ Y.namespace('M.atto_mathslate').Button = Y.Base.create('button', Y.M.editor_atto
             });
             Y.one('#' + editorID).on('mouseover', function(e) {
                 e.stopPropagation();
-                console.log('mouseover');
             });
             Y.one('#' + editorID).on('mouseout', function(e) {
                 e.stopPropagation();
-                console.log('mouseout');
             });
         }, (typeof window.MathJax === 'undefined') ? 500 : 0);
 
