@@ -56,6 +56,7 @@ before_install:
   - export PATH="$(cd ci/bin; pwd):$(cd ci/vendor/bin; pwd):$PATH"
 
 install:
+  - moodle-plugin-ci add-plugin dthies/moodle-editor_tinymce-mathslate
   - moodle-plugin-ci install
 
 script:
