@@ -19,7 +19,9 @@ Feature: Atto mathslate editor
     And I click on "Mathslate" "button"
     And I click on "[title='Greek alphabet and symbols']" "css_element"
     And I click on "[title='\\infty']" "css_element"
+    And I wait "3" seconds
     And I click on "Display TeX" "button"
+    And I wait "3" seconds
     And I click on "Update profile" "button"
     And I follow "Profile" in the user menu
     Then "\infty" "text" should exist
