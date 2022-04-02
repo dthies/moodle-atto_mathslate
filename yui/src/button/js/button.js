@@ -32,7 +32,7 @@
  */
 
 var COMPONENTNAME = 'atto_mathslate';
-var CSS = {EDITOR: 'mathslate-atto'};
+var CLASSES = {EDITOR: 'mathslate-atto'};
 
 Y.namespace('M.atto_mathslate').Button = Y.Base.create('button', Y.M.editor_atto.EditorPlugin, [], {
     _currentSelection: null,
@@ -81,7 +81,7 @@ Y.namespace('M.atto_mathslate').Button = Y.Base.create('button', Y.M.editor_atto
         var context = this;
         window.setTimeout(function() {
             me = new M.tinymce_mathslate.Editor('#' + editorID, config);
-            Y.one('#' + editorID).addClass(CSS.EDITOR);
+            Y.one('#' + editorID).addClass(CLASSES.EDITOR);
             var cancel = Y.one('#' + editorID).appendChild(Y.Node.create('<button>Cancel</button>'));
             var displayTex = Y.one('#' + editorID).appendChild(Y.Node.create('<button>Display TeX</button>'));
             var inlineTex = Y.one('#' + editorID).appendChild(Y.Node.create('<button>Inline TeX</button>'));
