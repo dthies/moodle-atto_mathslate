@@ -37,7 +37,7 @@ function atto_mathslate_strings_for_js() {
 
     $PAGE->requires->strings_for_js(array( 'mathslate', 'cancel', 'cancel_desc',
             'inline', 'display', 'inline_desc', 'display_desc', 'nomathjax',
-            'clear', 'undo', 'redo', 'help'), 'tinymce_mathslate');
+            'clear', 'undo', 'redo', 'help'), 'atto_mathslate');
 };
 
 /**
@@ -61,8 +61,8 @@ function atto_mathslate_params_for_js($elementid, $options, $fpoptions) {
         $result = format_text("\\(x\\)", true, $options);
     }
 
-    $config = $CFG->wwwroot . '/lib/editor/tinymce/plugins/mathslate/config.json';
-    $help = $CFG->wwwroot . '/lib/editor/tinymce/plugins/mathslate/help.php';
+    $config = $CFG->wwwroot . '/lib/editor/atto/plugins/mathslate/config.json';
+    $help = $CFG->wwwroot . '/lib/editor/atto/plugins/mathslate/help.php';
     return array('configurl' => $config,
                 'filteractive' => $filteractive,
                 'helpurl' => $help

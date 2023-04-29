@@ -49,7 +49,7 @@ Y.namespace('M.atto_mathslate').Button = Y.Base.create('button', Y.M.editor_atto
             iconComponent: COMPONENTNAME,
             callback: this._displayDialogue
         });
-        M.tinymce_mathslate.help = this.get('helpurl');
+        M.atto_mathslate.help = this.get('helpurl');
     },
     _displayDialogue: function() {
         var editorID = Y.guid();
@@ -80,7 +80,7 @@ Y.namespace('M.atto_mathslate').Button = Y.Base.create('button', Y.M.editor_atto
         var me;
         var context = this;
         window.setTimeout(function() {
-            me = new M.tinymce_mathslate.Editor('#' + editorID, config);
+            me = new M.atto_mathslate.Editor('#' + editorID, config);
             Y.one('#' + editorID).addClass(CLASSES.EDITOR);
             var cancel = Y.one('#' + editorID).appendChild(Y.Node.create('<button>Cancel</button>'));
             var displayTex = Y.one('#' + editorID).appendChild(Y.Node.create('<button>Display TeX</button>'));

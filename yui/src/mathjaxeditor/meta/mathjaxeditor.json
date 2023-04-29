@@ -1,0 +1,8 @@
+{
+  "moodle-atto_mathslate-mathjaxeditor" : {
+      "requires" : [
+          "moodle-atto_mathslate-snippeteditor",
+          "dd-drop"
+      ]
+  }
+}
