@@ -35,9 +35,11 @@ defined('MOODLE_INTERNAL') || die();
 function atto_mathslate_strings_for_js() {
     global $PAGE;
 
-    $PAGE->requires->strings_for_js(array( 'mathslate', 'cancel', 'cancel_desc',
-            'inline', 'display', 'inline_desc', 'display_desc', 'nomathjax',
-            'clear', 'undo', 'redo', 'help'), 'atto_mathslate');
+    $PAGE->requires->strings_for_js([
+        'mathslate', 'cancel', 'cancel_desc',
+        'inline', 'display', 'inline_desc', 'display_desc', 'nomathjax',
+        'clear', 'undo', 'redo', 'help',
+    ], 'atto_mathslate');
 };
 
 /**
@@ -63,8 +65,9 @@ function atto_mathslate_params_for_js($elementid, $options, $fpoptions) {
 
     $config = $CFG->wwwroot . '/lib/editor/atto/plugins/mathslate/config.json';
     $help = $CFG->wwwroot . '/lib/editor/atto/plugins/mathslate/help.php';
-    return array('configurl' => $config,
-                'filteractive' => $filteractive,
-                'helpurl' => $help
-    );
+    return [
+        'configurl' => $config,
+        'filteractive' => $filteractive,
+        'helpurl' => $help,
+    ];
 }
