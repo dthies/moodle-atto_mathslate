@@ -14,6 +14,8 @@
  * @copyright  2013 Daniel Thies  <dthies@ccal.edu>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
+// eslint-disable-next-line camelcase
 M.atto_mathslate = M.atto_mathslate || {};
 var NS = M && M.atto_mathslate || {};
 /* Constructor function for Snippet editor
@@ -25,19 +27,19 @@ NS.mSlots = function() {
     var stackPointer = 0;
     var slots = [];
     this.slots = slots;
-/* save the state of the editor on the stack at location Stackpointer
+/* Save the state of the editor on the stack at location Stackpointer
  * @function saveState
  */
-    function saveState () {
+    function saveState() {
         stack.splice(stackPointer);
         var cs = slots.slice(0);
-        var ci =[];
+        var ci = [];
         cs.forEach(function(s) {
             ci.push(s.slice(0));
         });
         stack[stackPointer] = [cs, ci];
     }
-/* restore a saved state of the editor from the stack
+/* Restore a saved state of the editor from the stack
  * @function restoreState
  */
     function restoreState() {
@@ -94,11 +96,10 @@ NS.mSlots = function() {
                 snippet[2].forEach(function(a) {
                     if (Array.isArray(a)) {
                         findBlank(a);
-                    }
-                    else if (a === '[]') {
+                    } else if (a === '[]') {
                         var newID = 'MJX-' + Y.guid();
                         slots.push([['mo', {id: newID, "class": 'blank', tex: ['']}, '\u25FB']]);
-                        snippet[2][snippet[2].indexOf(a)] = ['mrow', {}, slots[slots.length-1]];
+                        snippet[2][snippet[2].indexOf(a)] = ['mrow', {}, slots[slots.length - 1]];
                     }
                 });
             }
@@ -120,10 +121,13 @@ NS.mSlots = function() {
         var str;
         this.slots.forEach(function(slot) {
             slot.forEach(function(m) {
-                if (m[1].id === id) {str = Y.JSON.stringify(m);}
+                if (m[1].id === id) {
+                    str = Y.JSON.stringify(m);
+                }
             });
         });
-        return str;},
+        return str;
+    };
 /* Determine whether ID corresponds to a valid draggable expression
  * @method isItem
  * @param string id
@@ -132,12 +136,17 @@ NS.mSlots = function() {
     this.isItem = function(id) {
         var found = false;
         this.slots.forEach(function(slot) {
-            if (found) {return;}
+            if (found) {
+                return;
+            }
             slot.forEach(function(m) {
-                if (m[1].id === id) {found = true;}
+                if (m[1].id === id) {
+                    found = true;
+                }
             });
         });
-        return found;},
+        return found;
+    };
 /* Delete an expression and return the snippet of the expression
  * @method removeSnippet
  * @param string id
@@ -154,7 +163,7 @@ NS.mSlots = function() {
             });
         });
         return item;
-    },
+    };
 /* Insert the snippet of an expression before expression with given ID
  * @method removeSnippet
  * @param string id
@@ -176,8 +185,8 @@ NS.mSlots = function() {
         stackPointer++;
         this.next = null;
         saveState();
-        return ;
-    },
+        return;
+    };
 /* Add new expression to workspace following all others
  * @method append
  * @param array element
@@ -187,8 +196,8 @@ NS.mSlots = function() {
         stackPointer++;
         this.next = null;
         saveState();
-        return ;
-    },
+        return;
+    };
 /* Iterate through all draggable expressions executing callback
  * @method forEach
  * @param function f
@@ -199,7 +208,7 @@ NS.mSlots = function() {
                 f(m, slot);
                 });
             });
-        },
+        };
 /* Assign new IDs to all elements to avoid inference of MathJax with YUI in display
  * @method rekey
  */
@@ -208,13 +217,13 @@ NS.mSlots = function() {
         this.slots.forEach(function(s) {
             if (s.length === 0) {
                 s.push(['mo', {id: 'MJX-' + Y.guid(), "class": 'blank', tex: ['']}, '\u25FB']);
-            }
-            else {
+            } else {
                 s.forEach(function(m) {
                     if (!m[1]) {
                         return;
                     }
-                    if (m[1]['class'] && m[1]['class'] === 'blank' && s.length>1) {
+                    // eslint-disable-next-line dot-notation
+                    if (m[1]['class'] && m[1]['class'] === 'blank' && s.length > 1) {
                         buffer.removeSnippet(m[1].id);
                     }
                     if (m[1].id) {
@@ -224,13 +233,13 @@ NS.mSlots = function() {
             }
 
         });
-    },
+    };
 /* Return output in various formats
  * @method output
  * @param string format
  */
     this.output = function(format) {
-            function generateMarkup (s) {
+            function generateMarkup(s) {
                var str = '';
                if (typeof s === 'string') {
                    return s;
@@ -244,12 +253,10 @@ NS.mSlots = function() {
                      }
                      i++;
                   }
-               }
-               else if (s[2]) {
+               } else if (s[2]) {
                    if (typeof s[2] === 'string') {
                       str = str + s[2];
-                   }
-                   else {
+                   } else {
                        s[2].forEach(function(t) {
                            str = str + generateMarkup(t);
                        });
@@ -268,7 +275,7 @@ NS.mSlots = function() {
  * @param string format
  */
     this.preview = function(format) {
-            function generateMarkup (s) {
+            function generateMarkup(s) {
                var str = '';
                if (typeof s === 'string') {
                    return s;
@@ -285,19 +292,18 @@ NS.mSlots = function() {
                        }
                        i++;
                    }
-               }
-               else if (s[2]) {
+               } else if (s[2]) {
                    if (typeof s[2] === 'string') {
                        if (format) {
                            str = str + s[2];
                        }
-                   }
-                   else {
+                   } else {
                        s[2].forEach(function(t) {
                            str = str + generateMarkup(t);
                        });
                    }
                }
+                // eslint-disable-next-line dot-notation
                if (s[1] && s[1]['class'] && s[1]['class'] === 'blank') {
                    str = str + '<br>';
                }
@@ -320,7 +326,9 @@ NS.mSlots = function() {
         selected = null;
         this.slots.forEach(function(slot) {
             slot.forEach(function(m) {
-                if (m[1].id === id) {selected = m;}
+                if (m[1].id === id) {
+                    selected = m;
+                }
             });
         });
     };

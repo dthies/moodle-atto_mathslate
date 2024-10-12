@@ -60,7 +60,7 @@ function atto_mathslate_params_for_js($elementid, $options, $fpoptions) {
 
     // Run format_text to load MathJax via filter.
     if ($filteractive) {
-        $result = format_text("\\(x\\)", true, $options);
+        $result = format_text("\\(x\\)", true, ['context' => $context]);
     }
 
     $config = $CFG->wwwroot . '/lib/editor/atto/plugins/mathslate/config.json';

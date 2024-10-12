@@ -14,10 +14,11 @@
  * @copyright  2013-2014 Daniel Thies  <dthies@ccal.edu>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+// eslint-disable-next-line camelcase
 M.atto_mathslate = M.atto_mathslate || {};
 var NS = M && M.atto_mathslate || {};
 var dragenabled = true;
-var CSS = {
+var CLASSES = {
     SELECTED: 'mathslate-selected',
     WORKSPACE: 'mathslate-workspace',
     PREVIEW: 'mathslate-preview',
@@ -28,22 +29,23 @@ var CSS = {
     PANEL: 'mathslate-bottom-panel'
 };
 var SELECTORS = {
-    SELECTED: '.' + CSS.SELECTED,
-    HIGHLIGHT: '.' + CSS.HIGHLIGHT
+    SELECTED: '.' + CLASSES.SELECTED,
+    HIGHLIGHT: '.' + CLASSES.HIGHLIGHT
 };
 
-//Constructor for equation workspace
+/**
+ * Constructor for equation workspace
+ */
 NS.MathJaxEditor = function(id) {
     var MathJax = window.MathJax;
     var math = [];
     var se = new NS.mSlots();
     se.slots.push(math);
     var shim, ddnodes;
-    this.workspace = Y.one(id).append('<div id="canvas" class="' + CSS.WORKSPACE + '"/>');
+    this.workspace = Y.one(id).append('<div id="canvas" class="' + CLASSES.WORKSPACE + '"/>');
     var toolbar = Y.one(id).appendChild(Y.Node.create('<form></form>'));
-    var preview = Y.one(id).appendChild(Y.Node.create('<div class="' + CSS.PANEL + '"/>'));
+    var preview = Y.one(id).appendChild(Y.Node.create('<div class="' + CLASSES.PANEL + '"/>'));
     preview.delegate('click', function(e) {
-        //canvas.get('node').one('#' + this.getAttribute('id')).handleClick(e);
         ddnodes.one('#' + this.getAttribute('id')).handleClick(e);
     }, 'div');
     var canvas = new Y.DD.Drop({
@@ -54,42 +56,42 @@ NS.MathJaxEditor = function(id) {
         render();
     });
 
-    //Place buttons for internal editor functions
+    // Place buttons for internal editor functions.
 /*
     var undo = Y.Node.create('<button type="button" class="'
-           + CSS.UNDO + '">' + '<img class="iiicon" aria-hidden="true" role="presentation" width="16" height="16" src="'
+           + CLASSES.UNDO + '">' + '<img class="iiicon" aria-hidden="true" role="presentation" width="16" height="16" src="'
            + M.util.image_url('undo', 'editor_atto')
            + '" title="' + M.util.get_string('undo', 'atto_mathslate') + '"/></button>');
     var redo = Y.Node.create('<button type="button" class="'
-           + CSS.REDO + '">' + '<img class="iiicon" aria-hidden="true" role="presentation" width="16" height="16" src="'
+           + CLASSES.REDO + '">' + '<img class="iiicon" aria-hidden="true" role="presentation" width="16" height="16" src="'
            + M.util.image_url('redo', 'editor_atto') + '" title="'
            + M.util.get_string('redo', 'atto_mathslate') + '"/></button>');
     var clear = Y.Node.create('<button type="button" class="'
-           + CSS.CLEAR + '">' + '<img class="iiicon" aria-hidden="true" role="presentation" width="16" height="16" src="'
+           + CLASSES.CLEAR + '">' + '<img class="iiicon" aria-hidden="true" role="presentation" width="16" height="16" src="'
            + M.util.image_url('delete', 'editor_atto') + '" title="'
            + M.util.get_string('clear', 'atto_mathslate') + '"/></button>');
     var help = Y.Node.create('<button type="button" class="'
-           + CSS.HELP + '">' + '<img class="iiicon" aria-hidden="true" role="presentation" width="16" height="16" src="'
+           + CLASSES.HELP + '">' + '<img class="iiicon" aria-hidden="true" role="presentation" width="16" height="16" src="'
            + M.util.image_url('help', 'core') + '" title="'
            + M.util.get_string('help', 'atto_mathslate') + '"/></button>');
 */
 
-    var undo = Y.Node.create('<button type="button" class="' + CSS.UNDO + '"'
+    var undo = Y.Node.create('<button type="button" class="' + CLASSES.UNDO + '"'
            + '" title="' + M.util.get_string('undo', 'atto_mathslate') + '"/>'
            + '<math><mo>&#x25C1;</mo></math>'
            + '</button>');
 
-    var redo = Y.Node.create('<button type="button" class="' + CSS.REDO + '"'
+    var redo = Y.Node.create('<button type="button" class="' + CLASSES.REDO + '"'
            + '" title="' + M.util.get_string('redo', 'atto_mathslate') + '"/>'
            + '<math><mo>&#x25B7;</mo></math>'
            + '</button>');
-    var clear = Y.Node.create('<button type="button" class="' + CSS.CLEAR + '"'
+    var clear = Y.Node.create('<button type="button" class="' + CLASSES.CLEAR + '"'
            + '" title="' + M.util.get_string('clear', 'atto_mathslate') + '"/>'
            + '<math><mi>&#x2718;</mi></math>'
            + '</button>');
 
     var help = Y.Node.create('<button type="button" class="'
-           + CSS.HELP + '" title="'
+           + CLASSES.HELP + '" title="'
            + M.util.get_string('help', 'atto_mathslate') + '">'
            + '<math><mi>&#xE47C;</mi></math>'
            + '</button>');
@@ -123,7 +125,7 @@ NS.MathJaxEditor = function(id) {
 
     help.on('click', function() {
         preview.setHTML('<iframe src="' + NS.help + '" style="width: '
-            + preview.getStyle('width') + '" class="' + CSS.HELPBOX + '"/>');
+            + preview.getStyle('width') + '" class="' + CLASSES.HELPBOX + '"/>');
     });
 
         /* Create drop shim above workspace
@@ -134,16 +136,16 @@ NS.MathJaxEditor = function(id) {
         shim = Y.Node.create('<span></span>');
         shim.setHTML(se.preview().replace(/div/g, 'span').replace(/<\/*br>/g, ''));
         Y.one(id).appendChild(shim);
-        shim.all('span').each(function (s) {
+        shim.all('span').each(function(s) {
             if (!canvas.get('node').one('#' + s.getAttribute('id'))) {
                 return;
             }
             s.appendChild('<span style="position: relative; opacity: 0"><math display="inline">' +
-                toMathML([Y.JSON.parse(se.getItemByID(s.getAttribute('id')))]).replace(/id="[^"]*"/,'') +
+                toMathML([Y.JSON.parse(se.getItemByID(s.getAttribute('id')))]).replace(/id="[^"]*"/, '') +
                 '</math></span>');
             s.setAttribute('style', 'position: absolute; top: 0; left: 0; margin: 0px; z-index: +1');
         });
-        shim.all('span').each(function (s) {
+        shim.all('span').each(function(s) {
             if (!canvas.get('node').one('#' + s.getAttribute('id'))) {
                 return;
             }
@@ -160,24 +162,26 @@ NS.MathJaxEditor = function(id) {
     /* Add drag and drop functionality
      * @function makeDraggable
      */
-    function makeDraggable () {
+    function makeDraggable() {
         if (shim) {
             shim.remove();
         }
         makeDrops();
         ddnodes = shim;
-        preview.setHTML('<div class="' + CSS.PREVIEW + '">' + se.preview('tex') + '</div>');
+        preview.setHTML('<div class="' + CLASSES.PREVIEW + '">' + se.preview('tex') + '</div>');
         if (se.getSelected() && preview.one('#' + se.getSelected())) {
-            canvas.get('node').one('#' + se.getSelected()).addClass(CSS.SELECTED);
+            canvas.get('node').one('#' + se.getSelected()).addClass(CLASSES.SELECTED);
             canvas.get('node').one('#' + se.getSelected()).setAttribute('mathcolor', 'green');
             canvas.get('node').one('#' + se.getSelected()).setAttribute('stroke', 'green');
             canvas.get('node').one('#' + se.getSelected()).setAttribute('fill', 'green');
-            preview.one('#' + se.getSelected()).addClass(CSS.SELECTED);
+            preview.one('#' + se.getSelected()).addClass(CLASSES.SELECTED);
         }
 
         se.forEach(function(m) {
             var node = ddnodes.one('#' + m[1].id);
-            if (!node) {return;}
+            if (!node) {
+                return;
+            }
             node.setAttribute('title', preview.one('#' + m[1].id).getHTML().replace(/<div *[^>]*>|<\/div>|<br>/g, ''));
             node.handleClick = function(e) {
                 var selectedNode = ddnodes.one('#' + se.getSelected());
@@ -188,13 +192,13 @@ NS.MathJaxEditor = function(id) {
                     return;
                 }
                 if (selectedNode === node) {
-                    if (preview.one('#' + node.getAttribute('id')).test('.' + CSS.PREVIEW + ' >')) {
+                    if (preview.one('#' + node.getAttribute('id')).test('.' + CLASSES.PREVIEW + ' >')) {
                         se.select();
                         render();
                         return;
                     }
-                    node.removeClass(CSS.SELECTED);
-                    preview.one('#' + node.getAttribute('id')).removeClass(CSS.SELECTED);
+                    node.removeClass(CLASSES.SELECTED);
+                    preview.one('#' + node.getAttribute('id')).removeClass(CLASSES.SELECTED);
                     canvas.get('node').one('#' + se.getSelected()).removeAttribute('mathcolor');
                     canvas.get('node').one('#' + se.getSelected()).removeAttribute('stroke');
                     canvas.get('node').one('#' + se.getSelected()).removeAttribute('fill');
@@ -216,48 +220,54 @@ NS.MathJaxEditor = function(id) {
             if (!dragenabled) {
                 return;
             }
+            // eslint-disable-next-line dot-notation
             if ((!m[1] || !m[1]['class'] || m[1]['class'] !== 'blank') &&
                     !(selectedNode && preview.one('#' + se.getSelected()).one('#' + m[1].id))) {
-                var drag = new Y.DD.Drag({node: node,
+                var drag = new Y.DD.Drag({
+                    node: node,
                     moveOnEnd: false
                 });
 
                 drag.on('drag:start', function() {
                     if (canvas.get('node').one('#' + se.getSelected())) {
-                        preview.one('#' + se.getSelected()).removeClass(CSS.SELECTED);
-                        canvas.get('node').one('#' + se.getSelected()).removeClass(CSS.SELECTED);
+                        preview.one('#' + se.getSelected()).removeClass(CLASSES.SELECTED);
+                        canvas.get('node').one('#' + se.getSelected()).removeClass(CLASSES.SELECTED);
                         canvas.get('node').one('#' + se.getSelected()).removeAttribute('mathcolor');
                         canvas.get('node').one('#' + se.getSelected()).removeAttribute('stroke');
                         canvas.get('node').one('#' + se.getSelected()).removeAttribute('fill');
                         se.select();
                     }
-                    this.get('node').addClass(CSS.DRAGGEDNODE);
+                    this.get('node').addClass(CLASSES.DRAGGEDNODE);
                     this.get('node').setAttribute('mathcolor', 'red');
                     ddnodes.one('#' + m[1].id).setAttribute('mathcolor', 'red');
                     ddnodes.one('#' + m[1].id).setAttribute('stroke', 'red');
-                    this.get('dragNode').addClass(CSS.DRAGNODE);
+                    this.get('dragNode').addClass(CLASSES.DRAGNODE);
                     this.get('dragNode').all('> span')
                         .pop()
                         .setStyle('opacity', '1');
                 });
                 drag.on('drag:end', function() {
-                    this.get('node').removeClass(CSS.DRAGGEDNODE);
+                    this.get('node').removeClass(CLASSES.DRAGGEDNODE);
                     this.get('node').removeAttribute('mathcolor');
                     this.get('node').removeAttribute('stroke');
                     this.get('dragNode').all('> span')
                         .pop()
                         .setStyle('opacity', '0');
-                    this.get('dragNode').setStyles({top: 0, left: 0});
+                    this.get('dragNode').setStyles({
+                        top: 0,
+                        left: 0
+                    });
                 });
             }
 
-            var drop = new Y.DD.Drop({node: node});
+            var drop = new Y.DD.Drop({
+                node: node
+            });
             drop.on('drop:hit', function(e) {
                 var dragTarget = e.drag.get('node').get('id');
                 if (e.drag.get('data')) {
                     se.insertSnippet(m[1].id, se.createItem(e.drag.get('data')));
-                }
-                else if (dragTarget !== m[1].id && se.isItem(dragTarget) && !preview.one('#' + dragTarget).one('#' + m[1].id)) {
+                } else if (dragTarget !== m[1].id && se.isItem(dragTarget) && !preview.one('#' + dragTarget).one('#' + m[1].id)) {
                     se.insertSnippet(e.drop.get('node').get('id'), se.removeSnippet(dragTarget));
                 }
                 render();
@@ -265,25 +275,25 @@ NS.MathJaxEditor = function(id) {
             drop.on('drop:enter', function(e) {
                 e.stopPropagation();
                 ddnodes.all(id + ' ' + SELECTORS.HIGHLIGHT).each(function(n) {
-                     n.removeClass(CSS.HIGHLIGHT);
+                     n.removeClass(CLASSES.HIGHLIGHT);
                      var id = n.getAttribute('id');
                      if (canvas.get('node').one(id)) {
-                         canvas.get('node').one(id).removeClass(CSS.HIGHLIGHT);
+                         canvas.get('node').one(id).removeClass(CLASSES.HIGHLIGHT);
                          canvas.get('node').one(id).removeAttribute('mathcolor');
                          canvas.get('node').one(id).removeAttribute('stroke');
                          canvas.get('node').one(id).removeAttribute('fill');
                      }
                 });
-                ddnodes.one('#' + m[1].id).addClass(CSS.HIGHLIGHT);
-                canvas.get('node').one('#' + m[1].id).addClass(CSS.HIGHLIGHT);
+                ddnodes.one('#' + m[1].id).addClass(CLASSES.HIGHLIGHT);
+                canvas.get('node').one('#' + m[1].id).addClass(CLASSES.HIGHLIGHT);
                 canvas.get('node').one('#' + m[1].id).setAttribute('mathcolor', 'yellow');
                 canvas.get('node').one('#' + m[1].id).setAttribute('stroke', 'yellow');
                 canvas.get('node').one('#' + m[1].id).setAttribute('fill', 'yellow');
             });
             drop.on('drop:exit', function(e) {
                 e.stopPropagation();
-                this.get('node').removeClass(CSS.HIGHLIGHT);
-                canvas.get('node').one('#' + m[1].id).removeClass(CSS.HIGHLIGHT);
+                this.get('node').removeClass(CLASSES.HIGHLIGHT);
+                canvas.get('node').one('#' + m[1].id).removeClass(CLASSES.HIGHLIGHT);
                 canvas.get('node').one('#' + m[1].id).removeAttribute('mathcolor');
                 canvas.get('node').one('#' + m[1].id).removeAttribute('stroke');
                 canvas.get('node').one('#' + m[1].id).removeAttribute('fill');
@@ -296,11 +306,15 @@ NS.MathJaxEditor = function(id) {
      * @param object element
      */
     function toMathML(element) {
-        if (typeof element !== "object") { return element; }
+        if (typeof element !== "object") {
+            return element;
+        }
         var str = '';
         element.forEach(function(m) {
             var attr;
-            if (typeof m !== "object") { return; }
+            if (typeof m !== "object") {
+                return;
+            }
             str += '<' + m[0];
             if (m[1] && (typeof m[1] === "object")) {
                 for (attr in m[1]) {
@@ -327,7 +341,9 @@ NS.MathJaxEditor = function(id) {
             });
         } else {
             canvas.get('node').setHTML('');
-            MathJax.Hub.Queue(['addElement', MathJax.HTML, canvas.get('node').getDOMNode(), 'math', {display: "block"}, math]);
+            MathJax.Hub.Queue(['addElement', MathJax.HTML, canvas.get('node').getDOMNode(), 'math', {
+                display: "block"
+            }, math]);
             MathJax.Hub.Queue(["Typeset", MathJax.Hub, canvas.get('node').getDOMNode()]);
             MathJax.Hub.Queue(makeDraggable);
         }
@@ -370,10 +386,15 @@ NS.MathJaxEditor = function(id) {
      */
     this.output = function(format) {
         function cleanSnippet(s) {
-            if (typeof s !== "object") { return s; }
+            if (typeof s !== "object") {
+                return s;
+            }
             var t = s.slice(0);
             t.forEach(function(m, index) {
-                if (typeof m !== "object") { return; }
+                if (typeof m !== "object") {
+                    return;
+                }
+                // eslint-disable-next-line dot-notation
                 if (m[1] && m[1]['class']) {
                     t[index] = '[]';
                     return;

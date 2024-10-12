@@ -14,6 +14,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+// eslint-disable-next-line camelcase
 M.atto_mathslate = M.atto_mathslate || {};
 var NS = M && M.atto_mathslate || {};
 /* Constructor function for an editor of a page.
@@ -34,41 +35,45 @@ NS.TeXTool = function(editorID, addMath) {
     input.focus();
     var drag = new Y.DD.Drag({node: tool});
     drag.on('drag:end', function() {
-        this.get('node').setStyle('top' , '0');
-        this.get('node').setStyle('left' , '0');
+        this.get('node').setStyle('top', '0');
+        this.get('node').setStyle('left', '0');
     });
     tool.toMathML = function(callback) {
         var mml;
         var jax = window.MathJax.Hub.getAllJax(this.generateID())[0];
         try {
             mml = jax.root.toMathML("");
-        } catch(err) {
-            if (!err.restart) {throw err;} // an actual error
+        } catch (err) {
+            if (!err.restart) {
+                throw err;
+            }
             return window.MathJax.Callback.After(['toMathML', this, jax, callback], err.restart);
         }
-        window.MathJax.Callback(callback)(mml);
+        return window.MathJax.Callback(callback)(mml);
     };
-    input.on ('change', function() {
+    input.on('change', function() {
         var jax = window.MathJax.Hub.getAllJax(tool.generateID())[0];
         var tex = this.getDOMNode().value;
-        if (!jax) {return;}
+        if (!jax) {
+            return;
+        }
         var output = '';
         window.MathJax.Hub.Queue(['Text', jax, this.getDOMNode().value]);
 
-        var parse = function (mml) {
+        var parse = function(mml) {
             if (/<mtext mathcolor="red">/.test(mml) || /<merror/.test(mml)) {
                 return;
             }
             mml = mml.replace(/$\s+/mg, ' ');
 
-            //First look for beginning tag.
+            // First look for beginning tag.
             var tag = mml.replace(/^\s*<([a-z]*).*/, '$1');
 
-            //Find attributes of element.
+            // Find attributes of element.
             mml = mml.replace(/^\s*<[a-z]*/, '');
             output += '["' + tag + '", {';
             while (mml.trim().search('>') > 1) {
-                 output  += mml.replace(/^ *([a-z]*) *= *"([^"]*)".*/, '"$1": "$2"');
+                 output += mml.replace(/^ *([a-z]*) *= *"([^"]*)".*/, '"$1": "$2"');
                  mml = mml.replace(/^ *([a-z]*) *= *"([^"]*)"/, '');
                  if (mml.trim().search('>') > 1) {
                      output += ', ';
@@ -76,22 +81,23 @@ NS.TeXTool = function(editorID, addMath) {
             }
             if (mml.trim().match('^/>')) {
                 output += '}]';
-                return mml.trim().replace('/>', '');
+                mml.trim().replace('/>', '');
+                return;
             }
             output += '}, ';
             mml = mml.replace(/^ *>/, '');
 
-            //If element contains string quote string.
+            // If element contains string quote string.
             if (mml.replace(new RegExp('^ *([^<]*).*'), '$1')) {
-                output += '"' +mml.replace(/<.*/, '') + '"';
+                output += '"' + mml.replace(/<.*/, '') + '"';
                 mml = mml.replace(/^ *[^<]*/, '');
                 if (mml.trim().search('<!--') === 0) {
                     mml = mml.replace(/<!--[^>]*-->/, '');
                 }
-            //Otherwise parse the children.
+            // Otherwise parse the children.
             } else {
                 output += '[';
-                while(mml.trim().search('</' + tag + '>') !== 0) {
+                while (mml.trim().search('</' + tag + '>') !== 0) {
                     mml = parse(mml);
                     if (mml.trim().search('</' + tag + '>') !== 0) {
                         output += ', ';
@@ -100,7 +106,8 @@ NS.TeXTool = function(editorID, addMath) {
                 output += ']';
             }
             output += ']';
-            return mml.replace('</' + tag + '>', '');
+            mml.replace('</' + tag + '>', '');
+            return;
         };
         window.MathJax.Hub.Queue(['toMathML', tool, parse]);
 

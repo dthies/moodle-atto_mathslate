@@ -15,9 +15,12 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-if (M) {M.atto_mathslate = M.atto_mathslate || {};}
+if (M) {
+    // eslint-disable-next-line camelcase
+    M.atto_mathslate = M.atto_mathslate || {};
+}
 var NS = M && M.atto_mathslate || {};
-var CSS = {
+var CLASSES = {
    TOOLBOX: 'mathslate-toolbox',
    DRAGNODE: 'mathslate-toolbox-drag',
    UNDO: 'mathslate-undo-button',
@@ -42,9 +45,9 @@ NS.Editor = function(editorID, config, params) {
     var toolboxID = Y.guid();
     var latexToolID = Y.guid();
     var workID = Y.guid();
-    this.node.addClass(CSS.EDITOR);
-    //Place math editor on page
-    this.node.setHTML('<div id="' + toolboxID + '" class="' + CSS.TOOLBOX + '">'
+    this.node.addClass(CLASSES.EDITOR);
+    // Place math editor on page.
+    this.node.setHTML('<div id="' + toolboxID + '" class="' + CLASSES.TOOLBOX + '">'
             + '<div style="background-color: white; color: green; height: 300px; line-height: 75px; '
             + 'font-size: 18px; text-align:center"><br />Mathslate Mathematics Editor<br />'
             + 'Version 1.1</div><script type="math/tex">\\quad</script><math> <mo> </mo></math></div>'
@@ -59,8 +62,7 @@ NS.Editor = function(editorID, config, params) {
                     snippet[2].forEach(function(a) {
                     if (Array.isArray(a)) {
                             findBlank(a);
-                        }
-                        else if (a === '[]') {
+                        } else if (a === '[]') {
                         snippet[2][snippet[2].indexOf(a)] = ['mn', {}, '[]'];
                         }
                     });
@@ -80,8 +82,7 @@ NS.Editor = function(editorID, config, params) {
                     s[1].tex.forEach(function(t) {
                         if (typeof t === 'string') {
                             o += t;
-                        }
-                        else {
+                        } else {
                             o += title(s[2][t]);
                         }
                     });
@@ -141,19 +142,23 @@ NS.Editor = function(editorID, config, params) {
                     tabs
                 );
 
-                me.output = function(f) {return mje.output(f);};
+                me.output = function(f) {
+                    return mje.output(f);
+                };
 
                 if (Y.one('#' + toolboxID)) {
                     Y.one('#' + toolboxID).setHTML('');
                     tabview.render('#' + toolboxID);
                     if (Y.one('#' + latexToolID)) {
-                        new NS.TeXTool('#' + latexToolID, function(json) {mje.addMath(json);});
+                        new NS.TeXTool('#' + latexToolID, function(json) {
+                            mje.addMath(json);
+                        });
                     }
                 }
                 MathJax.Hub.Queue(["Typeset", MathJax.Hub, toolboxID]);
-                MathJax.Hub.Queue(function () {
+                MathJax.Hub.Queue(function() {
                     tbox.tools.forEach(function(tool) {
-                        if(Y.one('#' + toolboxID) && Y.one('#' + toolboxID).one('#' + tool.id)) {
+                        if (Y.one('#' + toolboxID) && Y.one('#' + toolboxID).one('#' + tool.id)) {
                             tbox.registerTool(tool);
                         }
                     });
@@ -187,12 +192,12 @@ NS.Editor = function(editorID, config, params) {
             var d = new Y.DD.Drag({node: '#' + tool.id});
             d.set('data', tool.json);
             d.on('drag:start', function() {
-                this.get('dragNode').addClass(CSS.DRAGNODE);
+                this.get('dragNode').addClass(CLASSES.DRAGNODE);
             });
             d.on('drag:end', function() {
-                this.get('node').setStyle('top' , '0');
-                this.get('node').setStyle('left' , '0');
-                this.get('node').removeClass(CSS.DRAGNODE);
+                this.get('node').setStyle('top', '0');
+                this.get('node').setStyle('left', '0');
+                this.get('node').removeClass(CLASSES.DRAGNODE);
             });
         }
     };
@@ -200,7 +205,7 @@ NS.Editor = function(editorID, config, params) {
 
     MathJax.Hub.Queue(['Typeset', MathJax.Hub, toolboxID]);
 
-    //Fetch configuration string for tools and initialyze
+    // Fetch configuration string for tools and initialyze.
     var request;
     Y.on('io:success', function(id, o) {
         if (request.id === id) {
